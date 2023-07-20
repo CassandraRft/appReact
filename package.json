@@ -6,16 +6,25 @@
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "axios": "^1.4.0",
+    "express": "^4.18.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "_comment1": "Compile le code client en utilisant esbuild, en entrée src/index.js, en sortie dist/bundle.js, et en spécifiant que les fichiers .js sont des fichiers jsx",
+    "build:client": "esbuild src/index.js --bundle --outfile=dist/bundle.js --loader:.js=jsx",
+
+    "_comment2": "Compile le code serveur en utilisant esbuild, en entrée server/server.jsx, en sortie build/server.js, et en spécifiant que la plateforme cible est node",
+    "build:server": "esbuild server/server.jsx --bundle --outfile=build/server.js --platform=node",
+
+    "_comment3": "Exécute les scripts 'build:client' et 'build:server' pour compiler le code client et serveur",
+    "build": "npm run build:client && npm run build:server",
+    
+    "_comment4": "Exécute les scripts 'build' pour compiler le code, puis exécute le code serveur en utilisant Node.js",
+    "start": "npm run build & node ./build/server.js"
   },
   "eslintConfig": {
     "extends": [
